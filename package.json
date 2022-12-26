@@ -1,0 +1,32 @@
+{
+  "name": "wasm-dft",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build-js",
+    "build-js": "esbuild ./js/dft.ts --bundle --outfile=./js/dist/dft.js",
+    "serve": "serve ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/knidarkness/wasm-dft.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/knidarkness/wasm-dft/issues"
+  },
+  "homepage": "https://github.com/knidarkness/wasm-dft#readme",
+  "devDependencies": {
+    "esbuild": "^0.16.10",
+    "serve": "^14.1.2",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "@types/node": "^18.11.17",
+    "mathjs": "^11.5.0"
+  }
+}
