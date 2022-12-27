@@ -7,9 +7,23 @@
     <title>WASM Demo
     </title>
     <script type = "text/javascript" src="./js/dist/dft.js"></script>
+    <script src="./c/wasm-dist/main.js"></script>
+    <script>
+        setTimeout(() => {
+            console.log('.>>>>>>')
+            const js_wrapped_fib = Module.cwrap("fib", "number", ["number"]);
+            const intArray = Int32Array([1, 2, 3]);
+            const len = intArray.length;
+            const bytes_per_element = input_array.BYTES_PER_ELEMENT;
+            
+            console.log(js_wrapped_fib(5));
+        }, 2000);
+    </script>
 </head>
 <body>
+    
     <h1>sadasd</h1>
     <button onclick="(() => console.log(dft([1, 0, 1, 0])))()">JavaScript</button>
+    <p>Open the console to see the result!</p>
 </body>
 </html>
