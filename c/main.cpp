@@ -29,8 +29,8 @@ void calculateDFT(std::vector<int> *points)
         Xi[k] = 0;
         for (n = 0; n < points->size(); n++)
         {
-            Xr[k] = (Xr[k] + points->at(n) * cos(2 * 3.141592 * k * n / points->size()));
-            Xi[k] = (Xi[k] - points->at(n) * sin(2 * 3.141592 * k * n / points->size()));
+            Xr[k] = (Xr[k] + points->at(n) * cos(2 * M_PI * k * n / points->size()));
+            Xi[k] = (Xi[k] - points->at(n) * sin(2 * M_PI * k * n / points->size()));
         }
 
         printf("(%f) + j(%f)\n", Xr[k], Xi[k]);
