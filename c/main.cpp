@@ -6,7 +6,7 @@
 
 extern "C" {
     int fib(int n);    
-    void calculateDFT(std::vector<int> *points);
+    int calculateDFT(int len, int *points);
     int main();
 }
 
@@ -17,36 +17,36 @@ int fib(int n){
         return fib(n - 1) + fib(n - 2);
 }
 
-void calculateDFT(std::vector<int> *points)
+int calculateDFT(int len, int *points)
 {
-    float Xr[points->size()];
-    float Xi[points->size()];
+    printf("%d\n", len);
+    printf("%d\n", points[0]);
+    float Xr[len];
+    float Xi[len];
     int i, k, n = 0;
 
-    for (k = 0; k < points->size(); k++)
+    for (int i = 0; i < len; i++) {
+        printf("%d\n", points[i]);
+    }
+
+    for (k = 0; k < len; k++)
     {
         Xr[k] = 0;
         Xi[k] = 0;
-        for (n = 0; n < points->size(); n++)
+        for (n = 0; n < len; n++)
         {
-            Xr[k] = (Xr[k] + points->at(n) * cos(2 * M_PI * k * n / points->size()));
-            Xi[k] = (Xi[k] - points->at(n) * sin(2 * M_PI * k * n / points->size()));
+            Xr[k] = (Xr[k] + points[n] * cos(2 * M_PI * k * n / len));
+            Xi[k] = (Xi[k] - points[n] * sin(2 * M_PI * k * n / len));
         }
 
         printf("(%f) + j(%f)\n", Xr[k], Xi[k]);
     }
+
+    return 100;
 }
 
 // Driver Code
 int main()
 {
-    std::vector<int> v = std::vector<int>();
-
-    v.push_back(1);
-    v.push_back(0);
-    v.push_back(1);
-    v.push_back(0);
-    calculateDFT(&v);
-
     return 0;
 }

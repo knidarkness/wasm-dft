@@ -6,8 +6,8 @@
   "scripts": {
     "build": "npm run build-js && npm run build-go && npm run build-cpp",
     "build-js": "esbuild ./js/dft.ts --bundle --outfile=./js/dist/dft.js",
-    "build-go": "GOOS=js GOARCH=wasm go build -o go/dist/main go/main.go",
-    "build-cpp": "emcc -o c/wasm-dist/main.html c/main.cpp -s WASM=1 -s EXPORTED_RUNTIME_METHODS='[\"cwrap\"]' -s EXPORTED_FUNCTIONS='[\"_fib\", \"_main\"]'",
+    "build-go": "GOOS=js GOARCH=wasm go build -o go/dist/main.wasm go/main.go && cp \"$(go env GOROOT)/misc/wasm/wasm_exec.js\" .",
+    "build-cpp": "emcc -o c/wasm-dist/main.html c/main.cpp -s WASM=1 -s EXPORTED_RUNTIME_METHODS='[\"cwrap\"]' -s EXPORTED_FUNCTIONS='[\"_fib\", \"_main\", \"_free\", \"_malloc\", \"_calculateDFT\"]'",
     "serve": "serve .",
     "start": "npm run build && npm run serve"
   },
