@@ -19,15 +19,9 @@ int fib(int n){
 
 int calculateDFT(int len, int *points)
 {
-    printf("%d\n", len);
-    printf("%d\n", points[0]);
     float Xr[len];
     float Xi[len];
     int i, k, n = 0;
-
-    for (int i = 0; i < len; i++) {
-        printf("%d\n", points[i]);
-    }
 
     for (k = 0; k < len; k++)
     {
