@@ -1,6 +1,6 @@
 function cppCalculateDFT() {
     const calculateDFT = Module.cwrap("calculateDFT", "number", ["number", "number"]);
-    const intArray = new Int32Array([1, 0, 1, 0]);
+    const intArray = new Int32Array([1, -1, 1, -1]);
     const bytes_per_element = intArray.BYTES_PER_ELEMENT;
     var buf = Module._malloc(intArray.length * bytes_per_element);
     Module.HEAP32.set(intArray, buf >> 2);
@@ -12,14 +12,15 @@ function goCalculateDFT() {
     const go = new Go();
     WebAssembly.instantiateStreaming(fetch("/go/dist/main.wasm"), go.importObject).then((result) => {
         go.run(result.instance);
+        const intArray = new Int32Array([1, -1, 1, -1]);
+        const u8s_plainJS = new Uint8Array(intArray.buffer);
+        _go_DFT_naive(u8s_plainJS);
     });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log('hello');
-
     document.getElementById('js-pure').addEventListener('click', () => {
-        console.log(dft([1, 0, 1, 0]));
+        console.log(dft([1, -1, 1, -1]));
     });
 
     document.getElementById('cpp-wasm').addEventListener('click', () => {
@@ -29,8 +30,4 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('go-wasm').addEventListener('click', () => {
         goCalculateDFT();
     });
-
-    setTimeout(() => {
-        cppCalculateDFT();
-    }, 100);
 })
