@@ -67,7 +67,6 @@ func DFT_naive(this js.Value, args []js.Value) interface{} {
 		if i < 0.00001 {
 			i = 0
 		}
-		println(r)
 		real[k], imag[k] = r, i
 	}
 	return 0

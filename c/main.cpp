@@ -33,7 +33,7 @@ int calculateDFT(int len, int *points)
             Xi[k] = (Xi[k] - points[n] * sin(2 * M_PI * k * n / len));
         }
 
-        printf("(%f) + j(%f)\n", Xr[k], Xi[k]);
+        // printf("(%f) + j(%f)\n", Xr[k], Xi[k]);
     }
 
     return 100;

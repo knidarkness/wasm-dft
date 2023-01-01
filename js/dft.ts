@@ -1,6 +1,6 @@
 import * as math from 'mathjs';
 
-export function dft(x: number[]): math.Complex[] {
+export async function dft(x: number[]): Promise<math.Complex[]> {
     const X: math.Complex[] = [];
     const N = x.length;
 
