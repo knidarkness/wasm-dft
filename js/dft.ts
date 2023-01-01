@@ -1,36 +1,28 @@
-import * as math from 'mathjs';
+export async function dft(x: number[]): Promise<[number[], number[]]> {
+    const Xr = [];
+    const Xi = [];
 
-export async function dft(x: number[]): Promise<math.Complex[]> {
-    const X: math.Complex[] = [];
-    const N = x.length;
-
-    for(let f = 0; f < N; f++) {
-        let signal: math.Complex = math.complex();
-
-        for (let t = 0; t < N; t++) {
-            const amplitude = x[t];
-
-            const rotation = -1 * (2 * Math.PI) * f * (t / N);
-
-            const point = math.complex(Math.cos(rotation), Math.sin(rotation));
-            const contribution = math.multiply(point, amplitude) as math.Complex;
-
-            signal = math.add(signal, contribution);
+    let i, k, n = 0;
+    
+    for(k = 0; k < x.length; k++) {
+        Xr[k] = 0;
+        Xi[k] = 0;
+        
+        for (n = 0; n < x.length; n++) {
+            Xr[k] = (Xr[k] + x[n] * Math.cos(2 * Math.PI * k * n / x.length));
+            Xi[k] = (Xi[k] - x[n] * Math.sin(2 * Math.PI * k * n / x.length));
         }
 
-        if (Math.abs(signal.re) < 0.000000000001) {
-            signal.re = 0;
+        if (Math.abs(Xr[k]) < 0.000000000001) {
+            Xr[k] = 0;
         }
 
-        if (Math.abs(signal.im) < 0.000000000001) {
-            signal.im = 0;
+        if (Math.abs(Xi[k]) < 0.000000000001) {
+            Xi[k] = 0;
         }
-
-        // signal = math.divide(signal, N) as math.Complex;
-        X[f] = signal;
     }
     
-    return X;
+    return [Xr, Xi];
 }
 
 //@ts-ignore
